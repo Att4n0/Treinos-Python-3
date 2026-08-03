@@ -1,0 +1,7 @@
+# Arquivos compilados do Python
+*.pyc
+*.pyo
+*.pyd
+
+# Pastas de cache
+**/__pycache__/
