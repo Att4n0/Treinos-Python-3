@@ -1,5 +1,6 @@
 from modelos.avaliacao import Avaliacao
 '''Importa a classe Avaliacao do arquivo avaliacao. Essa classe vai interagir com a classe Restaurante'''
+from modelos.cardapio.item_cardapio import ItemCardapio
 
 class Restaurante:
     """Representa um restaurante e suas características."""
@@ -8,11 +9,6 @@ class Restaurante:
     def __init__(self, nome, categoria):
         '''No momento da criação(instanciação) de um objeto da classe, o método inicializa os
         atributos e define o estado inicial da instância.
-        Com isso, um restaurante não pode ser criado sem definir os atributos ligados somente a ele.
-        Os atributos são passados quando o objeto é vinculado à classe, entre os parênteses.
-        O self serve para representar e guardar os dados do objeto específico que acabou de ser criado.
-        Ele funciona como uma etiqueta que liga os valores que você passa (como nome ou idade)
-        àquele objeto exato na memória do computador.
         
         Input:
         - Argumentos
@@ -22,10 +18,11 @@ class Restaurante:
         self._categoria = categoria.upper()
         self._ativo = False
         self._avaliacao = []
+        self._cardapio = []
         Restaurante.restaurantes.append(self)
 
     def __str__(self):
-        '''Basicamente, o __str__  em Python é um método especial que define a representação em texto legível 
+        '''Método especial que define a representação em texto legível 
         de um objeto, sendo acionado automaticamente pelas funções print() e str().
         Quando der um print que aciona o objeto, ao invés do retorno ser um código falando
         onde ele tá na memória e a classe, vai ser retornado o que tiver em retorno aqui em baixo.
@@ -110,3 +107,19 @@ class Restaurante:
         quantidade_de_notas = len(self._avaliacao)
         media = round(soma_das_notas / quantidade_de_notas, 1)
         return media
+
+    def adicionar_no_cardapio(self, item):
+        if isinstance(item,ItemCardapio):
+            self._cardapio.append(item)
+
+    @property
+    def exibir_cardapio(self):
+        print(f'Cardápio do restaurante {self._nome}\n')
+        for i,item in enumerate(self._cardapio, start=1):
+            if hasattr(item,'descricao'):
+                mensagem_prato = f'{i}. Nome: {item._nome} | Preço: R${item._preco} | Descrição: {item.descricao}'
+                print (mensagem_prato)
+
+            else:
+                mensagem_bebida = f'{i}. Nome: {item._nome} | Preço: R${item._preco} | Tamanho: {item.tamanho}'
+                print(mensagem_bebida)
