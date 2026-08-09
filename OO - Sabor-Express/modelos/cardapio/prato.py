@@ -10,4 +10,4 @@ class Prato(ItemCardapio):
 
     def aplicar_desconto(self):
         '''Aplica desconto de 8% a pratos, caso acionado pela aplicação.'''
-        self._preco -= (self._preco * 0.08)
+        self._preco -= (self._preco * 0.05)
