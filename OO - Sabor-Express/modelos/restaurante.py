@@ -109,6 +109,8 @@ class Restaurante:
         return media
 
     def adicionar_no_cardapio(self, item):
+        '''Caso o item com o qual o método é chamado for instância de classe filha ou pai,
+        adiciona à lista no cardápio.'''
         if isinstance(item,ItemCardapio):
             self._cardapio.append(item)
 
